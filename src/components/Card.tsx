@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { ForwardedRef, forwardRef } from 'react'
 
 type CardProps = {
   isFirst?: boolean
@@ -19,12 +20,15 @@ const getCardContent = ({
   }
 }
 
-function Card({ isFirst, isLast, visible }: CardProps) {
+const Card = forwardRef(function Card(
+  { isFirst, isLast, visible }: CardProps,
+  ref: ForwardedRef<HTMLDivElement>,
+) {
   return (
-    <div className={classNames('card', { show: visible })}>
+    <div className={classNames('card', { show: visible })} ref={ref}>
       {getCardContent({ isFirst, isLast })}
     </div>
   )
-}
+})
 
 export default Card
